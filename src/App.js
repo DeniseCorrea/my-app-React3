@@ -3,15 +3,36 @@ import logo from "./logo.svg";
 import "./App.css";
 
 import Quotes from "./Quotes";
+import Lamp from "./Lamp";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isWorking: true
+    };
+  }
+
+  workingClick = () => {
+    this.setState({ isWorking: !this.state.isWorking });
+  };
+
   render() {
+    const homer = this.state.isWorking ? 'Working' : 'Taking a break';
+    const newHeader = this.state.isWorking ? 'App-header' : 'App-header-stop';
+
     return (
       <div className="App">
-        <header className="App-header">
+        <header className={newHeader}>
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Simpsons Quotes</h1>
+          <button onClick={this.workingClick}
+          className={homer}>
+          {homer.toUpperCase()}
+          </button>
         </header>
+        <Lamp on />
+        <Lamp />
         <Quotes
           quote="I believe the children are the future... Unless we stop them now!"
           character="Homer Simpson"
